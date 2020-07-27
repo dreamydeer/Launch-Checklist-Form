@@ -35,19 +35,25 @@ window.addEventListener("load", function () {
       document.getElementById("launchStatus").style.color = "#008000";
       document.getElementById("pilotStatus").innerHTML = `Pilot ${pilotName.value} is ready for launch`;
       document.getElementById("copilotStatus").innerHTML = `Pilot ${coPilotName.value} is ready for launch.`;
-
-      if (!isNaN(Number(pilotName.value)) || !isNaN(Number(coPilotName.value)) || isNaN(Number(cargoMass.value)) || isNaN(Number(fuelLevel.value))) {
+      
+      if (
+         pilotName.value === "" ||
+         coPilotName.value === "" ||
+         fuelLevel.value === "" ||
+         cargoMass.value === ""
+      ) {
+         alert("All fields are required!");
+      } else if (
+         !isNaN(Number(pilotName.value)) ||
+         !isNaN(Number(coPilotName.value)) ||
+         isNaN(Number(cargoMass.value)) ||
+         isNaN(Number(fuelLevel.value))
+      ) {
          alert("Make sure to enter valid information for each field!");
          document.getElementById("launchStatus").innerHTML = `Shuttle not ready for launch!`;
          document.getElementById("launchStatus").style.color = "#FF0000";
-      } else if (
-         pilotName.value === "" ||
-         coPilotName.value === "" ||
-         isNaN(Number(fuelLevel.value)) ||
-         isNaN(Number(cargoMass.value))
-      ) {
-         alert("All fields are required!");
       }
+
       if (Number(fuelLevel.value) < 10000) {
          document.getElementById("fuelStatus").innerHTML = 'Not enough fuel for the journey!';
          document.getElementById("launchStatus").innerHTML = `Shuttle not ready for launch!`;
